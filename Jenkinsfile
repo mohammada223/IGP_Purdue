@@ -7,7 +7,7 @@ pipeline
 		{
 			steps
 			{
-				git 'https://github.com/jsachdev07/igp-mar22.git'
+				git 'https://github.com/mohammada223/IGP_Purdue.git'
 			}
 		}
 		
