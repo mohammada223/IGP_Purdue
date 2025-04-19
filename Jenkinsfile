@@ -39,8 +39,8 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-			    sh 'cp /var/lib/jenkins/workspace/$JOB_NAME/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$JOB_NAME/ABCtechnologies-1.0.war'
-			    sh 'docker build -t arshadmckv/abc_tech:$BUILD_NUMBER .'
+			    sh 'sudo cp /var/lib/jenkins/workspace/$JOB_NAME/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$JOB_NAME/ABCtechnologies-1.0.war'
+			    sh 'sudo docker build -t arshadmckv/abc_tech:$BUILD_NUMBER .'
 	
 			}
 		}
@@ -51,7 +51,7 @@ stage('Build Docker Image')
 			{   
 			    withDockerRegistry([ credentialsId: "dockerhub_id", url: "docker.io" ])
 			    {   
-			       sh 'docker push arshadmckv/abc_tech:$BUILD_NUMBER'
+			       sh 'sudo docker push arshadmckv/abc_tech:$BUILD_NUMBER'
 				   
 			    }
 			}
@@ -61,7 +61,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-				sh 'docker run -itd -P arshadmckv/abc_tech:$BUILD_NUMBER'
+				sh 'sudo docker run -itd -P arshadmckv/abc_tech:$BUILD_NUMBER'
 			}
 		}
 
