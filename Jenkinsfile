@@ -39,10 +39,9 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-			    sh 'cp /var/lib/jenkins/workspace/$JOB_NAME/target/abctechnologies.war /var/lib/jenkins/workspace/$JOB_NAME/abctechnologies.war'
-				
-                sh 'docker build -t mohammada223/IGP Pipeline Purdue:$BUILD_NUMBER .'
-
+			    sh 'cp /var/lib/jenkins/workspace/$JOB_NAME/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$JOB_NAME/ABCtechnologies-1.0.war'
+			    sh 'docker build -t arshadmckv/abc_tech:$BUILD_NUMBER .'
+	
 			}
 		}
 
@@ -50,9 +49,9 @@ stage('Build Docker Image')
 		{ 
 			steps
 			{   
-			    withDockerRegistry([ credentialsId: "dockerhub", url: "" ])
+			    withDockerRegistry([ credentialsId: "dockerhub_id", url: "docker.io" ])
 			    {   
-			       sh 'docker push mohammada223/IGP Pipeline Purdue:$BUILD_NUMBER'
+			       sh 'docker push arshadmckv/abc_tech:$BUILD_NUMBER'
 				   
 			    }
 			}
@@ -62,7 +61,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-				sh 'docker run -itd -P mohammada223/IGP Pipeline Purdue:$BUILD_NUMBER'
+				sh 'docker run -itd -P arshadmckv/abc_tech:$BUILD_NUMBER'
 			}
 		}
 
