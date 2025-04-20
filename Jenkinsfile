@@ -17,6 +17,17 @@ pipeline
 			{
 				sh 'mvn compile'
 			}
+			
+		post {
+                success {
+                    // Copy .war file to job name folder
+                    script {
+                        def sourceWar = "/var/lib/jenkins/workspace/IGP Pipeline CD/target/ABCtechnologies-1.0.war"
+                        def targetFolder = "/var/lib/jenkins/workspace/IGP Pipeline CD"
+                        sh "mkdir -p ${targetFolder}"
+                        sh "cp ${sourceWar} ${targetFolder}/ABCtechnologies-1.0.war"
+                    }
+                }			
 		}
 
 		stage('Unit Test')
@@ -39,7 +50,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-			    sh 'cp /var/lib/jenkins/workspace/IGP Pipeline CD/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/IGP Pipeline CD/ABCtechnologies-1.0.war'
+			    //sh 'cp /var/lib/jenkins/workspace/IGP Pipeline CD/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/IGP Pipeline CD/ABCtechnologies-1.0.war'
 			    sh 'docker build -t arshadmckv/abc_tech:$BUILD_NUMBER .'
 	
 			}
