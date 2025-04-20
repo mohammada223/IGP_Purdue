@@ -26,10 +26,10 @@ pipeline
                         def targetFolder = "/var/lib/jenkins/workspace/IGP Pipeline CD"
                         sh "mkdir -p ${targetFolder}"
                         sh "cp ${sourceWar} ${targetFolder}/ABCtechnologies-1.0.war"
-                    }
-                }			
+                    	   }
+                         }			
+		      }
 		}
-
 		stage('Unit Test')
 		{
 			steps
