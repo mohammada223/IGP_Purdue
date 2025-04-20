@@ -39,7 +39,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-			    sh 'cp /var/lib/jenkins/workspace/$JOB_NAME/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/$JOB_NAME/ABCtechnologies-1.0.war'
+			    sh 'cp /var/lib/jenkins/workspace/IGP Pipeline CD/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/IGP Pipeline CD/ABCtechnologies-1.0.war'
 			    sh 'docker build -t arshadmckv/abc_tech:$BUILD_NUMBER .'
 	
 			}
