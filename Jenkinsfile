@@ -1,6 +1,10 @@
 pipeline
 {
 	agent any
+	environment {
+        DOCKER_IMAGE = "arshadmckv/abc_tech"
+        WORK_DIR = "/var/lib/jenkins/workspace/IGP Pipeline CD"
+    }
 	stages
 	{
 		stage('Code Checkout')
@@ -18,18 +22,8 @@ pipeline
 				sh 'mvn compile'
 			}
 			
-		post {
-                success {
-                    // Copy .war file to job name folder
-                    script {
-                        def sourceWar = "/var/lib/jenkins/workspace/IGP Pipeline CD/target/ABCtechnologies-1.0.war"
-                        def targetFolder = "/var/lib/jenkins/workspace/IGP Pipeline CD"
-                        sh "mkdir -p ${targetFolder}"
-                        sh "cp ${sourceWar} ${targetFolder}/ABCtechnologies-1.0.war"
-                    	   }
-                         }			
-		      }
 		}
+		
 		stage('Unit Test')
 		{
 			steps
@@ -50,8 +44,8 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-			    //sh 'cp /var/lib/jenkins/workspace/IGP Pipeline CD/target/ABCtechnologies-1.0.war /var/lib/jenkins/workspace/IGP Pipeline CD/ABCtechnologies-1.0.war'
-			    sh 'docker build -t arshadmckv/abc_tech:$BUILD_NUMBER .'
+			    sh 'cp ${WORK_DIR}/target/ABCtechnologies-1.0.war abc_tech.war'
+                	    sh 'docker build -t ${DOCKER_IMAGE}:latest .'
 	
 			}
 		}
@@ -62,7 +56,7 @@ stage('Build Docker Image')
 			{   
 			    withDockerRegistry([ credentialsId: "dockerhub_id", url: "docker.io" ])
 			    {   
-			       sh 'docker push arshadmckv/abc_tech:$BUILD_NUMBER'
+			       sh 'docker push ${DOCKER_IMAGE}:latest'
 				   
 			    }
 			}
@@ -72,7 +66,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-				sh 'docker run -itd -P arshadmckv/abc_tech:$BUILD_NUMBER'
+				sh 'docker run -itd -p 9090:9090 --name abcapp ${DOCKER_IMAGE}:latest'
 			}
 		}
 
