@@ -44,7 +44,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-			    sh 'cp ${WORK_DIR}/target/ABCtechnologies-1.0.war abc_tech.war'
+			    //sh 'cp ${WORK_DIR}/target/ABCtechnologies-1.0.war abc_tech.war'
                 	    sh 'docker build -t ${DOCKER_IMAGE}:latest .'
 	
 			}
