@@ -54,7 +54,7 @@ stage('Build Docker Image')
 		{ 
 			steps
 			{   
-			    withDockerRegistry([ credentialsId: "dockerhub_id", url: "docker.io" ])
+			    withDockerRegistry([ credentialsId: "dockerhub_id", url: "" ])
 			    {   
 			       sh 'docker push ${DOCKER_IMAGE}:latest'
 				   
