@@ -3,7 +3,7 @@ pipeline
 	agent any
 	environment {
         DOCKER_IMAGE = "arshadmckv/abc_tech"
-        WORK_DIR = "/var/lib/jenkins/workspace/IGP Pipeline CD"
+        WORK_DIR = "/var/lib/jenkins/workspace/IGPFinal"
     }
 	stages
 	{
