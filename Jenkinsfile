@@ -70,6 +70,14 @@ stage('Build Docker Image')
 			}
 		}
 
+		stage('Deploy to kubernetes')
+		{
+			steps
+			{
+				sh 'kubectl apply -f deploy.yaml'
+				sh 'kubectl apply -f service.yaml'
+			}
+		}
 		
    }
 }
