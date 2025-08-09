@@ -66,7 +66,7 @@ stage('Build Docker Image')
 		{
 			steps
 			{
-				sh 'docker run -itd -p 9090:9090 --name abcapp_1 ${DOCKER_IMAGE}:latest'
+				sh 'docker run -itd -p 9091:9090 --name abcapp_1 ${DOCKER_IMAGE}:latest'
 			}
 		}
 
