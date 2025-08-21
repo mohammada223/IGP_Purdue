@@ -14,10 +14,11 @@ spec:
         app: abc_deploy
     spec:
       containers:
-        - name: abcapp_1
+        - name: abcapp1
           image: arshadmckv/abc_tech:latest
           ports:
             - containerPort: 9090
 ---
+
 
 
