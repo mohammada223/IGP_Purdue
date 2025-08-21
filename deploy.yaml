@@ -17,5 +17,6 @@ spec:
         - name: abcapp_1
           image: arshadmckv/abc_tech:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 9080
 ---
+
