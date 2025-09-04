@@ -74,8 +74,10 @@ stage('Build Docker Image')
 		{
 			steps
 			{
+				withCredentials([file(credentialsId: 'kube_config_file', variable: 'KUBECONFIG')]) {
 				sh 'kubectl apply -f deploy.yaml'
 				sh 'kubectl apply -f service.yaml'
+				}
 			}
 		}
 		
